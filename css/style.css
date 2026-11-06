@@ -1,0 +1,1373 @@
+/* ==========================================================================
+   DESIGN SYSTEM & CSS VARIABLES
+   Theme: Baby Blue & Romantic Pink for Youssef & Hanan 💕
+   ========================================================================== */
+:root {
+    /* Color Palette */
+    --primary-pink: #FF6584;
+    --primary-pink-light: #FF8DA1;
+    --primary-pink-soft: #FFE5EC;
+    --primary-pink-deep: #E63956;
+    
+    --baby-blue: #70D6FF;
+    --baby-blue-light: #B8EBFF;
+    --baby-blue-soft: #E8F7FF;
+    --baby-blue-deep: #00A8E8;
+
+    --gold-accent: #FFD166;
+    --gold-glow: rgba(255, 209, 102, 0.4);
+
+    --text-dark: #2B2D42;
+    --text-muted: #6C757D;
+    --text-light: #FFFFFF;
+
+    /* Glassmorphism Tokens */
+    --glass-bg: rgba(255, 255, 255, 0.72);
+    --glass-bg-hover: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.65);
+    --glass-shadow: 0 12px 36px rgba(255, 101, 132, 0.14), 0 4px 12px rgba(112, 214, 255, 0.12);
+
+    /* Radii */
+    --radius-sm: 12px;
+    --radius-md: 20px;
+    --radius-lg: 28px;
+    --radius-pill: 9999px;
+
+    /* Typography */
+    --font-main: 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-heading: 'Cairo', sans-serif;
+    --font-playful: 'Marhey', cursive, sans-serif;
+
+    /* Transitions */
+    --transition-bounce: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    --transition-smooth: all 0.25s ease-out;
+}
+
+/* ==========================================================================
+   GLOBAL RESET & BASE STYLES
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: var(--font-main);
+    background: linear-gradient(135deg, #FFF0F5 0%, #E6F5FC 50%, #FFE9EE 100%);
+    color: var(--text-dark);
+    direction: rtl;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Dynamic Ambient Glow Orbs */
+.glow-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.6;
+    animation: orbFloat 10s ease-in-out infinite alternate;
+}
+
+.orb-pink {
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(255, 101, 132, 0.35) 0%, rgba(255, 101, 132, 0) 70%);
+    top: -50px;
+    right: -80px;
+}
+
+.orb-blue {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(112, 214, 255, 0.4) 0%, rgba(112, 214, 255, 0) 70%);
+    bottom: -60px;
+    left: -70px;
+    animation-delay: -5s;
+}
+
+@keyframes orbFloat {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(30px, 40px) scale(1.15); }
+}
+
+/* Particle Canvas Container for floating hearts */
+.particles-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.floating-heart-particle {
+    position: absolute;
+    bottom: -40px;
+    font-size: 20px;
+    opacity: 0.7;
+    animation: floatUpwards linear forwards;
+    pointer-events: none;
+}
+
+@keyframes floatUpwards {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(0.6);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-110vh) rotate(360deg) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* ==========================================================================
+   APP VIEWPORT (Mobile-First Frame)
+   ========================================================================== */
+.app-viewport {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 480px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 16px 14px 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Glass Panel Reusable Component */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glass-shadow);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition-smooth);
+}
+
+/* Screen Stage Transitions */
+.screen-stage {
+    display: none;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.screen-stage.active {
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   STAGE 1: THE PLAYFUL LOVE TRAP (شاشة البداية)
+   ========================================================================== */
+#stage-trap {
+    min-height: calc(100vh - 56px);
+    justify-content: center;
+    align-items: center;
+}
+
+.trap-card {
+    width: 100%;
+    text-align: center;
+    padding: 32px 18px 24px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 240, 245, 0.8) 100%);
+}
+
+.badge-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--baby-blue), var(--primary-pink));
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 18px;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 4px 14px rgba(255, 101, 132, 0.3);
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+}
+
+/* Big Beating 3D Heart Hero */
+.heart-hero-wrapper {
+    position: relative;
+    width: 160px;
+    height: 150px;
+    margin: 10px auto 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heart-pulse-halo {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: rgba(255, 101, 132, 0.25);
+    animation: heartHaloPulse 1.4s ease-out infinite;
+}
+
+@keyframes heartHaloPulse {
+    0% { transform: scale(0.9); opacity: 0.8; }
+    100% { transform: scale(1.8); opacity: 0; }
+}
+
+.big-heart {
+    position: relative;
+    width: 120px;
+    height: 110px;
+    background: linear-gradient(135deg, #FF4370 0%, #FF758C 60%, #FFA0B4 100%);
+    transform: rotate(-45deg);
+    cursor: pointer;
+    box-shadow: 0 15px 35px rgba(230, 57, 86, 0.45), inset 0 -4px 10px rgba(0,0,0,0.15);
+    animation: heartBeat 1.4s infinite ease-in-out;
+}
+
+.big-heart::before,
+.big-heart::after {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 110px;
+    background: inherit;
+    border-radius: 50%;
+    box-shadow: inherit;
+}
+
+.big-heart::before {
+    top: -55px;
+    left: 0;
+}
+
+.big-heart::after {
+    top: 0;
+    right: -55px;
+}
+
+.heart-inner-text {
+    position: absolute;
+    top: 25px;
+    left: -20px;
+    width: 160px;
+    transform: rotate(45deg);
+    z-index: 10;
+    color: white;
+    font-family: var(--font-playful);
+    font-weight: 700;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.heart-inner-text .names {
+    font-size: 16px;
+    letter-spacing: 0.5px;
+}
+
+.heart-inner-text .sparkle {
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+@keyframes heartBeat {
+    0% { transform: rotate(-45deg) scale(0.95); }
+    15% { transform: rotate(-45deg) scale(1.15); }
+    30% { transform: rotate(-45deg) scale(0.95); }
+    45% { transform: rotate(-45deg) scale(1.1); }
+    60% { transform: rotate(-45deg) scale(0.98); }
+    100% { transform: rotate(-45deg) scale(0.95); }
+}
+
+.trap-question {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--primary-pink-deep);
+    margin-bottom: 6px;
+    line-height: 1.4;
+}
+
+.trap-subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+}
+
+/* Buttons Playground Container - Dedicated mobile bounding box */
+.buttons-playground {
+    position: relative;
+    width: 100%;
+    min-height: 220px;
+    margin: 10px auto 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 6px;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px dashed rgba(255, 101, 132, 0.3);
+    overflow: hidden;
+}
+
+.btn-love {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 16px;
+    padding: 13px 24px;
+    border-radius: var(--radius-pill);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 84%;
+    max-width: 270px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Escaping Button ("بحب يوسف") - stays inside the playground */
+.btn-run {
+    background: linear-gradient(135deg, var(--primary-pink) 0%, #FF758C 100%);
+    color: white;
+    box-shadow: 0 8px 22px rgba(255, 101, 132, 0.45);
+    z-index: 10;
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: left 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                top 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+    touch-action: manipulation;
+}
+
+.btn-run:active {
+    transform: scale(0.96);
+}
+
+/* Blinking & Pulsing Glow Button ("مش بحب يوسف") - ينور ويقفل باستمرار */
+.btn-danger-soft {
+    background: #FFFFFF;
+    color: var(--primary-pink-deep);
+    border: 2px solid var(--primary-pink);
+    font-weight: 800;
+    z-index: 5;
+    position: relative;
+    animation: neonBlinkGlow 1.3s ease-in-out infinite;
+    transition: var(--transition-bounce);
+}
+
+@keyframes neonBlinkGlow {
+    0%, 100% {
+        box-shadow: 0 0 6px rgba(255, 101, 132, 0.25), 0 0 12px rgba(112, 214, 255, 0.2);
+        border-color: var(--baby-blue-light);
+        background: #FFFFFF;
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 22px rgba(255, 101, 132, 0.85), 0 0 38px rgba(112, 214, 255, 0.6), inset 0 0 12px rgba(255, 101, 132, 0.25);
+        border-color: var(--primary-pink);
+        background: linear-gradient(135deg, #FFF0F5 0%, #FFFFFF 100%);
+        transform: scale(1.04);
+    }
+}
+
+.btn-danger-soft:hover, .btn-danger-soft:active {
+    transform: scale(1.07);
+    border-color: var(--primary-pink-deep);
+}
+
+/* Tongue Out Emoji Pop Animation */
+.tongue-pop-emoji {
+    position: absolute;
+    font-size: 42px;
+    z-index: 999;
+    pointer-events: none;
+    animation: popAndWiggle 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    filter: drop-shadow(0 4px 12px rgba(255, 101, 132, 0.5));
+}
+
+@keyframes popAndWiggle {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.3) rotate(-15deg);
+    }
+    30% {
+        opacity: 1;
+        transform: translate(-50%, -70%) scale(1.5) rotate(15deg);
+    }
+    60% {
+        opacity: 1;
+        transform: translate(-50%, -90%) scale(1.3) rotate(-10deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -120%) scale(0.9) rotate(5deg);
+    }
+}
+
+.hint-text {
+    font-size: 13px;
+    color: #8E9AAF;
+    font-style: italic;
+    min-height: 22px;
+}
+
+/* ==========================================================================
+   POPUP MODAL: "مش بمزاج أمك" 😂
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(43, 45, 66, 0.55);
+    backdrop-filter: blur(8px);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.hidden {
+    display: none;
+    opacity: 0;
+}
+
+.funny-heart-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 25px 50px rgba(255, 101, 132, 0.35);
+    padding: 30px 22px;
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    border: 3px solid var(--primary-pink-soft);
+    position: relative;
+}
+
+.animate-pop {
+    animation: popIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.6); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.heart-face {
+    font-size: 50px;
+    margin-bottom: 10px;
+    animation: giggle 0.8s infinite alternate ease-in-out;
+}
+
+@keyframes giggle {
+    0% { transform: rotate(-8deg) scale(1); }
+    100% { transform: rotate(8deg) scale(1.1); }
+}
+
+.funny-title {
+    font-family: var(--font-playful);
+    font-size: 26px;
+    color: var(--primary-pink-deep);
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.funny-desc {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.btn-glow-rainbow {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #FF6584, #70D6FF, #FFD166);
+    background-size: 200% 200%;
+    animation: rainbowShift 3s ease infinite;
+    color: white;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 17px;
+    padding: 14px 28px;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 10px 25px rgba(255, 101, 132, 0.4);
+    transition: var(--transition-bounce);
+    width: 100%;
+}
+
+.btn-glow-rainbow:hover, .btn-glow-rainbow:active {
+    transform: scale(1.04);
+    box-shadow: 0 12px 30px rgba(255, 101, 132, 0.55);
+}
+
+@keyframes rainbowShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ==========================================================================
+   STAGE 2: MAIN LOVE HUB (عالم يوسف وحنان)
+   ========================================================================== */
+#stage-hub {
+    gap: 16px;
+}
+
+.hub-header {
+    padding: 18px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(232, 247, 255, 0.8) 100%);
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.avatar-ring {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-pink), var(--baby-blue));
+    padding: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 14px rgba(255, 101, 132, 0.25);
+    flex-shrink: 0;
+}
+
+.avatar-emoji {
+    font-size: 26px;
+    background: white;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-titles .welcome-title {
+    font-family: var(--font-heading);
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--primary-pink-deep);
+}
+
+.header-titles .welcome-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* Love Meter */
+.love-meter {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(255, 101, 132, 0.2);
+}
+
+.meter-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-dark);
+    white-space: nowrap;
+}
+
+.meter-bar {
+    flex: 1;
+    height: 9px;
+    background: #E8F4F8;
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    position: relative;
+}
+
+.meter-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--baby-blue), var(--primary-pink));
+    border-radius: var(--radius-pill);
+    animation: shimmerFill 2s infinite linear;
+}
+
+.meter-percent {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--primary-pink-deep);
+    white-space: nowrap;
+}
+
+/* Tab Navigation */
+.hub-nav {
+    display: flex;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(8px);
+    padding: 6px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--glass-border);
+}
+
+.nav-tab {
+    flex: 1;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 6px;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    font-family: var(--font-main);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    transition: var(--transition-bounce);
+}
+
+.nav-tab .nav-icon {
+    font-size: 16px;
+}
+
+.nav-tab.active {
+    background: white;
+    color: var(--primary-pink-deep);
+    box-shadow: 0 4px 15px rgba(255, 101, 132, 0.22);
+}
+
+/* Tab Content Panels */
+.tab-contents {
+    width: 100%;
+}
+
+.tab-panel {
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.tab-panel.active {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   TAB 1: LOVE ID CARD + GIFT BOX & SONG
+   ========================================================================== */
+.love-id-card {
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F7 60%, #F0F9FF 100%);
+    border: 2px solid rgba(255, 141, 161, 0.4);
+    box-shadow: 0 16px 32px rgba(255, 101, 132, 0.18);
+    position: relative;
+    padding: 22px 18px 16px;
+}
+
+.card-chip {
+    width: 38px;
+    height: 28px;
+    background: linear-gradient(135deg, #FFE082, #FFB300);
+    border-radius: 6px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border: 1px solid #FFA000;
+    box-shadow: inset 0 1px 2px rgba(255,255,255,0.7);
+}
+
+.card-logo {
+    font-family: var(--font-playful);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary-pink-deep);
+    margin-bottom: 18px;
+}
+
+.id-profile-grid {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.id-photo-frame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.id-photo-inner {
+    width: 76px;
+    height: 76px;
+    background: linear-gradient(135deg, var(--baby-blue-light), var(--primary-pink-soft));
+    border-radius: 18px;
+    border: 2px dashed var(--primary-pink);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 38px;
+}
+
+.id-status-badge {
+    background: var(--primary-pink-deep);
+    color: white;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: var(--radius-pill);
+}
+
+.id-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.detail-row {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.detail-row .field-name {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.detail-row .field-val {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.detail-row.highlight-row .field-val {
+    color: var(--primary-pink-deep);
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.card-footer-barcode {
+    border-top: 1px dashed rgba(255, 101, 132, 0.3);
+    padding-top: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.barcode-lines {
+    width: 80%;
+    height: 18px;
+    background: repeating-linear-gradient(
+        90deg,
+        #2B2D42 0px,
+        #2B2D42 2px,
+        transparent 2px,
+        transparent 5px,
+        #2B2D42 5px,
+        #2B2D42 8px
+    );
+    opacity: 0.6;
+}
+
+.barcode-num {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    font-family: monospace;
+}
+
+/* Gift Box Section */
+.gift-section {
+    text-align: center;
+    background: linear-gradient(180deg, #FFFFFF 0%, #FFF5F7 100%);
+}
+
+.gift-banner h3 {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    color: var(--primary-pink-deep);
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.gift-banner p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+}
+
+/* 3D Animated Gift Box */
+.gift-box-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    margin: 10px auto;
+    position: relative;
+    user-select: none;
+}
+
+.gift-box-3d {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    transition: var(--transition-bounce);
+}
+
+.gift-box-wrapper:hover .gift-box-3d {
+    transform: scale(1.08);
+}
+
+.gift-lid {
+    position: absolute;
+    top: 0;
+    left: -5px;
+    width: 100px;
+    height: 25px;
+    background: linear-gradient(135deg, var(--baby-blue), #50C5FF);
+    border-radius: 6px;
+    z-index: 5;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: left top;
+}
+
+.lid-ribbon {
+    position: absolute;
+    left: 45px;
+    top: 0;
+    width: 12px;
+    height: 100%;
+    background: var(--primary-pink);
+}
+
+.lid-bow {
+    position: absolute;
+    top: -20px;
+    left: 36px;
+    font-size: 26px;
+}
+
+.gift-base {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 90px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary-pink), #FF4D75);
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 10px 20px rgba(255, 101, 132, 0.35);
+}
+
+.base-ribbon {
+    position: absolute;
+    left: 39px;
+    top: 0;
+    width: 12px;
+    height: 100%;
+    background: var(--baby-blue);
+}
+
+/* Opened state of the box */
+.gift-box-3d.opened .gift-lid {
+    transform: rotate(-110deg) translate(-15px, -15px);
+}
+
+.tap-hint-pill {
+    margin-top: 12px;
+    background: var(--primary-pink-soft);
+    color: var(--primary-pink-deep);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: var(--radius-pill);
+    display: inline-block;
+    animation: bounceUpDown 1.5s infinite ease-in-out;
+}
+
+@keyframes bounceUpDown {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+/* Gift Emerge Stage: Box at bottom, Song emerges UPWARDS */
+.gift-emerge-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    width: 100%;
+}
+
+/* Revealed Song Container - Pops & Climbs UPWARDS from the box */
+.song-reveal-box {
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 18px 14px 16px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 240, 245, 0.9) 100%);
+    border: 2px solid var(--primary-pink);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 12px 30px rgba(255, 101, 132, 0.3), 0 0 20px rgba(112, 214, 255, 0.3);
+    animation: emergeUpFromBox 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    transform-origin: center bottom;
+    position: relative;
+    z-index: 2;
+}
+
+.song-reveal-box.hidden {
+    display: none;
+}
+
+@keyframes emergeUpFromBox {
+    0% {
+        opacity: 0;
+        transform: translateY(120px) scale(0.3);
+        filter: blur(8px);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-8px) scale(1.02);
+        filter: blur(0);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+.emerge-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--baby-blue), var(--primary-pink));
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 16px;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 3px 10px rgba(255, 101, 132, 0.3);
+    margin-bottom: 12px;
+    animation: popIn 0.5s ease-out;
+}
+
+.song-header {
+    margin-bottom: 14px;
+}
+
+.music-note-anim {
+    font-size: 20px;
+    margin-bottom: 4px;
+    animation: musicWiggle 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes musicWiggle {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.15) rotate(5deg); }
+}
+
+.song-title {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-dark);
+}
+
+.song-dedication {
+    font-size: 12px;
+    color: var(--primary-pink-deep);
+    font-style: italic;
+    margin-top: 2px;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    margin-bottom: 12px;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.btn-yt-direct {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #FF0000;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 20px;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.25);
+    transition: var(--transition-bounce);
+}
+
+.btn-yt-direct:hover {
+    transform: scale(1.04);
+}
+
+/* ==========================================================================
+   TAB 2: WHAT YOUSSEF SAYS (NICKNAMES)
+   ========================================================================== */
+.nicknames-intro {
+    text-align: center;
+    padding: 16px;
+}
+
+.nicknames-intro .intro-icon {
+    font-size: 32px;
+    margin-bottom: 6px;
+}
+
+.nicknames-intro h3 {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    color: var(--primary-pink-deep);
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.nicknames-intro p {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.nicknames-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.nickname-card {
+    cursor: pointer;
+    padding: 16px 18px;
+    transition: var(--transition-bounce);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.nickname-card:hover {
+    transform: translateY(-2px);
+    background: white;
+}
+
+.nick-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nick-badge {
+    background: var(--baby-blue-soft);
+    color: var(--baby-blue-deep);
+    font-weight: 800;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 8px;
+}
+
+.nick-name {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-dark);
+    flex: 1;
+}
+
+.expand-icon {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+}
+
+.nickname-card.expanded .expand-icon {
+    transform: rotate(90deg);
+}
+
+.nick-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0, 1, 0, 1), padding 0.3s ease;
+}
+
+.nickname-card.expanded .nick-body {
+    max-height: 200px;
+    transition: max-height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    padding-top: 12px;
+    border-top: 1px dashed rgba(255, 101, 132, 0.2);
+    margin-top: 10px;
+}
+
+.nick-text {
+    font-size: 14px;
+    color: #4A5568;
+    line-height: 1.6;
+}
+
+.nickname-card.highlight-gold {
+    border: 2px solid var(--gold-accent);
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFFDF5 100%);
+}
+
+.nickname-card.highlight-gold .nick-badge {
+    background: #FFF9E6;
+    color: #D4A017;
+}
+
+/* ==========================================================================
+   TAB 3: HANAN'S MESSAGE TO YOUSSEF (WHATSAPP)
+   ========================================================================== */
+.message-writer-container {
+    position: relative;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 245, 247, 0.9) 100%);
+    overflow: hidden;
+}
+
+/* Scattered decorative hearts */
+.scattered-hearts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.scattered-heart {
+    position: absolute;
+    opacity: 0.18;
+    font-size: 18px;
+    animation: gentleWobble 4s infinite ease-in-out alternate;
+}
+
+@keyframes gentleWobble {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-10px) rotate(15deg); }
+}
+
+.writer-header {
+    text-align: center;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.writer-icon {
+    font-size: 32px;
+}
+
+.writer-header h3 {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--primary-pink-deep);
+}
+
+.writer-subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* Interactive Textarea & Dynamic Placeholder */
+.textarea-box {
+    position: relative;
+    width: 100%;
+    margin-bottom: 14px;
+    z-index: 1;
+}
+
+.dynamic-placeholder {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    left: 18px;
+    pointer-events: none;
+    color: #A0AEC0;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.dynamic-placeholder.hidden {
+    opacity: 0;
+    transform: translateY(-8px);
+}
+
+#hananMessageInput {
+    width: 100%;
+    border: 2px solid var(--baby-blue-light);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 16px;
+    font-family: var(--font-main);
+    font-size: 15px;
+    color: var(--text-dark);
+    line-height: 1.6;
+    outline: none;
+    resize: none;
+    transition: var(--transition-smooth);
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.03);
+}
+
+#hananMessageInput:focus {
+    border-color: var(--primary-pink);
+    background: #FFFFFF;
+    box-shadow: 0 0 0 4px rgba(255, 101, 132, 0.15);
+}
+
+/* Quick romantic pill tags */
+.quick-tags-container {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 20px;
+}
+
+.tags-title {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.quick-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.quick-pill {
+    border: 1px solid var(--primary-pink-soft);
+    background: white;
+    color: var(--primary-pink-deep);
+    font-family: var(--font-main);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: var(--transition-bounce);
+}
+
+.quick-pill:hover, .quick-pill:active {
+    background: var(--primary-pink);
+    color: white;
+    transform: translateY(-2px);
+    border-color: var(--primary-pink);
+}
+
+/* WhatsApp Action Button */
+.send-action-wrapper {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-whatsapp {
+    width: 100%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: white;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 16px;
+    padding: 14px 20px;
+    border-radius: var(--radius-pill);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+    transition: var(--transition-bounce);
+}
+
+.btn-whatsapp:not(.disabled):hover,
+.btn-whatsapp:not(.disabled):active {
+    transform: scale(1.03);
+    box-shadow: 0 10px 28px rgba(37, 211, 102, 0.5);
+}
+
+.btn-whatsapp.disabled {
+    background: #CBD5E0;
+    color: #718096;
+    box-shadow: none;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.target-phone-note {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.target-phone-note strong {
+    color: #128C7E;
+    font-family: monospace;
+    font-size: 12px;
+}
+

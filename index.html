@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>يوسف & يارا 💕 قصة حب أبدية</title>
+    <meta name="description" content="صفحة حب تفاعلية مخصصة ليارا من يوسف">
+    
+    <!-- Romantic Heart Favicon for Browser Tabs -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    
+    <!-- Google Fonts: Cairo, Tajawal, & Marhey for cute playful arabic typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Marhey:wght@400;600;700&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Canvas Confetti library for celebration moments -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Floating Background Canvas for Romantic Particle Hearts -->
+    <div id="particle-container" class="particles-bg"></div>
+
+    <!-- Background Ambience & Glow Orbs -->
+    <div class="glow-orb orb-pink"></div>
+    <div class="glow-orb orb-blue"></div>
+
+    <!-- MAIN APP CONTAINER (Mobile Frame Viewport) -->
+    <main class="app-viewport">
+
+        <!-- ==============================================
+             STAGE 1: THE PLAYFUL LOVE TRAP (شاشة البداية)
+             ============================================== -->
+        <section id="stage-trap" class="screen-stage active">
+            <div class="trap-card glass-panel">
+                <div class="badge-tag">سؤال حب مصيري 💌</div>
+                
+                <!-- Beating Giant 3D Heart -->
+                <div class="heart-hero-wrapper">
+                    <div class="heart-pulse-halo"></div>
+                    <div class="big-heart" id="beatingHeart">
+                        <span class="heart-shine"></span>
+                        <div class="heart-inner-text">
+                            <span class="names">يوسف & يارا</span>
+                            <span class="sparkle">✨</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h1 class="trap-question">بتحبي يوسف أد إيه يا يويو؟ 🥰</h1>
+                <p class="trap-subtitle">اختاري بكل صراحة من قلبك 👇</p>
+
+                <!-- Action Buttons Container (Escaping playground) -->
+                <div class="buttons-playground" id="playground">
+                    <!-- The Escaping Button (Never gets clicked!) -->
+                    <button id="btnRunAway" class="btn-love btn-run" aria-label="بحب يوسف">
+                        <span class="btn-icon">💖</span>
+                        <span class="btn-text">بحب يوسف</span>
+                    </button>
+
+                    <!-- The Real Trigger Button -->
+                    <button id="btnNoLove" class="btn-love btn-danger-soft" aria-label="مش بحب يوسف">
+                        <span class="btn-icon">💔</span>
+                        <span class="btn-text">مش بحب يوسف</span>
+                    </button>
+                </div>
+
+                <div class="hint-text" id="escapeCounterHint">
+                    <span>جربي تدوسي على "بحب يوسف" كدا 😜</span>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==============================================
+             POPUP MODAL: "مش بمزاج أمك"
+             ============================================== -->
+        <div id="funnyModal" class="modal-overlay hidden">
+            <div class="funny-heart-card animate-pop">
+                <div class="modal-heart-shape">
+                    <div class="heart-face">😜</div>
+                    <h2 class="funny-title">مش بمزاج أُمك! 😂❤️</h2>
+                    <p class="funny-desc">هو في حد عنده يوسف وميحبوش؟ ده واقع خلاص ومكتوب عليكي يا قلبي! 💍✨</p>
+                    
+                    <button id="btnForceLove" class="btn-glow-rainbow">
+                        <span>هتحبيه غصب عنك 😌💕</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ==============================================
+             STAGE 2: THE MAIN LOVE HUB (عالم يوسف ويارا)
+             ============================================== -->
+        <section id="stage-hub" class="screen-stage">
+            <!-- Header with Romance Profile -->
+            <header class="hub-header glass-panel">
+                <div class="header-content">
+                    <div class="avatar-ring">
+                        <span class="avatar-emoji">👑</span>
+                    </div>
+                    <div class="header-titles">
+                        <h2 class="welcome-title">يا أهلاً بـ روحي وحياتي كلها 🌸</h2>
+                        <p class="welcome-sub">صُنع بكل حب لـ <strong>يارا</strong> من <strong>يوسف</strong></p>
+                    </div>
+                </div>
+                <div class="love-meter">
+                    <span class="meter-label">نسبة عشق يوسف ليكي:</span>
+                    <div class="meter-bar">
+                        <div class="meter-fill" style="width: 100%;"></div>
+                    </div>
+                    <span class="meter-percent">∞ لا نهائي %</span>
+                </div>
+            </header>
+
+            <!-- Navigation Tabs for the 3 Romantic Cards -->
+            <nav class="hub-nav" role="tablist">
+                <button class="nav-tab active" data-target="tab-card1">
+                    <span class="nav-icon">🪪</span>
+                    <span class="nav-label">عن يوسف</span>
+                </button>
+                <button class="nav-tab" data-target="tab-card2">
+                    <span class="nav-icon">💌</span>
+                    <span class="nav-label">يوسف بيقول إيه</span>
+                </button>
+                <button class="nav-tab" data-target="tab-card3">
+                    <span class="nav-icon">💬</span>
+                    <span class="nav-label">يارا عاوزة تقول إيه</span>
+                </button>
+            </nav>
+
+            <!-- CONTENT SECTIONS -->
+            <div class="tab-contents">
+
+                <!-- -----------------------------------------
+                     TAB 1: ABOUT YOUSSEF + GIFT BOX & SONG
+                     ----------------------------------------- -->
+                <div id="tab-card1" class="tab-panel active">
+                    
+                    <!-- Romantic Love ID Card -->
+                    <div class="love-id-card glass-panel">
+                        <div class="card-chip"></div>
+                        <div class="card-logo">جمهورية العشاق 💖</div>
+                        
+                        <div class="id-profile-grid">
+                            <div class="id-photo-frame">
+                                <div class="id-photo-inner">
+                                    <span class="id-avatar">🤴</span>
+                                </div>
+                                <span class="id-status-badge">مُتيم بيارا</span>
+                            </div>
+
+                            <div class="id-details">
+                                <div class="detail-row">
+                                    <span class="field-name">الاسم:</span>
+                                    <span class="field-val">يوسف ممدوح</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="field-name">العمر:</span>
+                                    <span class="field-val">24 سنة (وعايش عشانك) 🎂</span>
+                                </div>
+                                <div class="detail-row highlight-row">
+                                    <span class="field-name">الوظيفة:</span>
+                                    <span class="field-val">بيحب يارا ومسؤول عن سعادتها 💍❤️</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="field-name">فصيلة الدم:</span>
+                                    <span class="field-val">يارا + (Yara-Positive)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-footer-barcode">
+                            <div class="barcode-lines"></div>
+                            <span class="barcode-num">YOUSSEF-LOVES-YARA-2026-FOREVER</span>
+                        </div>
+                    </div>
+
+                    <!-- Surprise Gift Box Section -->
+                    <div class="gift-section glass-panel">
+                        <div class="gift-banner">
+                            <span class="sparkle-icon">🎁</span>
+                            <h3>بكس هدية ليارا</h3>
+                            <p>دوسي على العلبة عشان تفتحي هديتك الخاصة 🎀</p>
+                        </div>
+
+                        <!-- Gift Stage: Song emerges UPWARDS out of the box -->
+                        <div class="gift-emerge-stage">
+                            <!-- Revealed Song Player Container (Placed ABOVE the box so it emerges upwards) -->
+                            <div id="songContainer" class="song-reveal-box hidden">
+                                <div class="emerge-badge">✨ هديتك طلعتلك من العلبة! 🎶</div>
+                                <div class="song-header">
+                                    <div class="music-note-anim">🎵 🎶 💖</div>
+                                    <h4 class="song-title">عمرو دياب - اتأخر عتابنا</h4>
+                                    <p class="song-dedication">"الإهداء ده من قلب يوسف لروح قلبه يارا.." 🎼</p>
+                                </div>
+
+                                <!-- Embedded YouTube Video / Audio Player -->
+                                <div class="video-container">
+                                    <iframe id="ytPlayer" 
+                                        src="https://www.youtube-nocookie.com/embed/8oaEToHhrEc?enablejsapi=1&origin=https://localhost" 
+                                        title="عمرو دياب - اتأخر عتابنا" 
+                                        frameborder="0" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                        allowfullscreen>
+                                    </iframe>
+                                </div>
+
+                                <a href="https://www.youtube.com/watch?v=8oaEToHhrEc" target="_blank" rel="noopener" class="btn-yt-direct">
+                                    <span>تشغيل مباشر على يوتيوب 🎧</span>
+                                </a>
+                            </div>
+
+                            <!-- 3D Gift Box at the base -->
+                            <div class="gift-box-wrapper" id="giftBoxBtn">
+                                <div class="gift-box-3d" id="giftBox3D">
+                                    <div class="gift-lid">
+                                        <div class="lid-ribbon"></div>
+                                        <div class="lid-bow">🎀</div>
+                                    </div>
+                                    <div class="gift-base">
+                                        <div class="base-ribbon"></div>
+                                    </div>
+                                </div>
+                                <span class="tap-hint-pill" id="giftHintPill">اضغطي هنا لفتح الهدية ✨</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- -----------------------------------------
+                     TAB 2: WHAT YOUSSEF SAYS (NICKNAMES)
+                     ----------------------------------------- -->
+                <div id="tab-card2" class="tab-panel">
+                    <div class="nicknames-intro glass-panel">
+                        <div class="intro-icon">🗣️💕</div>
+                        <h3>يوسف بيقول ليارا إيه؟</h3>
+                        <p>دوسي على كل لقب من ألقابك عشان تشوفي يوسف بيقولهولك ليه وبيحسه إزاي 🌸</p>
+                    </div>
+
+                    <div class="nicknames-grid">
+                        
+                        <!-- 1. Bante -->
+                        <div class="nickname-card glass-panel" data-title="Bante">
+                            <div class="nick-header">
+                                <span class="nick-badge">01</span>
+                                <span class="nick-name">Bante 👧</span>
+                                <span class="expand-icon">✨</span>
+                            </div>
+                            <div class="nick-body">
+                                <p class="nick-text">"بنتي وصغيرتي اللي عينيها دايماً أماني، بحس معاكي إني أب بيخاف على حتة من روحه ومش مستعد يسيبها ثانية واحدة."</p>
+                            </div>
+                        </div>
+
+                        <!-- 2. أم خدود -->
+                        <div class="nickname-card glass-panel" data-title="أم خدود">
+                            <div class="nick-header">
+                                <span class="nick-badge">02</span>
+                                <span class="nick-name">أم خدود 🍬</span>
+                                <span class="expand-icon">✨</span>
+                            </div>
+                            <div class="nick-body">
+                                <p class="nick-text">"أحلى خدود بتورد لما تتكسف أو تضحك.. ضحكتك دي هي مصدر الطف وأجمل طاقة في يومي يا سكر حياتي."</p>
+                            </div>
+                        </div>
+
+                        <!-- 3. قمري -->
+                        <div class="nickname-card glass-panel" data-title="قمري">
+                            <div class="nick-header">
+                                <span class="nick-badge">03</span>
+                                <span class="nick-name">قمري 🌙✨</span>
+                                <span class="expand-icon">✨</span>
+                            </div>
+                            <div class="nick-body">
+                                <p class="nick-text">"القمر اللي بينور لي الدنيا حتى في أصعب الأوقات.. وجودك في حياتي يا يارا نعمة بحمد ربنا عليها في كل لحظة."</p>
+                            </div>
+                        </div>
+
+                        <!-- 4. كل ما ليا -->
+                        <div class="nickname-card glass-panel highlight-gold" data-title="كل ما ليا">
+                            <div class="nick-header">
+                                <span class="nick-badge">04</span>
+                                <span class="nick-name">كل ما ليا 👑💖</span>
+                                <span class="expand-icon">✨</span>
+                            </div>
+                            <div class="nick-body">
+                                <p class="nick-text">"أهلي وناسي وحاضري ومستقبلي ودنيتي كلها.. أنتي مش مجرد حبيبة، أنتي 'كل ما ليا' بجد."</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- -----------------------------------------
+                     TAB 3: YARA'S MESSAGE TO YOUSSEF (WHATSAPP)
+                     ----------------------------------------- -->
+                <div id="tab-card3" class="tab-panel">
+                    <div class="message-writer-container glass-panel">
+                        
+                        <!-- Floating scattered mini-hearts in writer background -->
+                        <div class="scattered-hearts" id="scatteredHearts"></div>
+
+                        <div class="writer-header">
+                            <span class="writer-icon">💌</span>
+                            <h3>يارا عاوزة تقول إيه ليوسف؟</h3>
+                            <p class="writer-subtitle">مساحتك الخاصة تكتبي ليوسف كل اللي في قلبك بكل حب 🌸</p>
+                        </div>
+
+                        <!-- Romantic Interactive Textarea Wrapper -->
+                        <div class="textarea-box">
+                            <div class="dynamic-placeholder" id="placeholderOverlay">
+                                <span>اكتبي اللي نفسك فيه يا عمري كله... ✨💖</span>
+                            </div>
+                            <textarea id="hananMessageInput" rows="6" maxlength="1500" spellcheck="false" placeholder=""></textarea>
+                        </div>
+
+                        <!-- Quick Romantic Stickers / Prompts -->
+                        <div class="quick-tags-container">
+                            <span class="tags-title">عبارات سريعة تدللي بيها يوسف:</span>
+                            <div class="quick-tags">
+                                <button type="button" class="quick-pill">وحشتني أوي يا جو 🥺</button>
+                                <button type="button" class="quick-pill">بحبك يا كل دنيتي ❤️</button>
+                                <button type="button" class="quick-pill">فخورة بيك دايماً يا سندي 👑</button>
+                                <button type="button" class="quick-pill">مستنياك يا عمري 💍</button>
+                            </div>
+                        </div>
+
+                        <!-- Send to WhatsApp Button -->
+                        <div class="send-action-wrapper">
+                            <button id="btnSendWhatsApp" class="btn-whatsapp disabled" disabled>
+                                <span class="wa-icon">
+                                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                                        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.203.043.072.043.419-.101.824zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.662 1.435 5.176L2 22l4.981-1.309A9.957 9.957 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/>
+                                    </svg>
+                                </span>
+                                <span class="wa-text">إرسال على الواتساب ليوسف 🚀</span>
+                            </button>
+                            <span class="target-phone-note">سيتم توجيه الرسالة مباشرة إلى رقم يوسف: <strong>01013371490</strong></span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Custom Logic Script -->
+    <script src="js/app.js" charset="UTF-8"></script>
+</body>
+</html>
